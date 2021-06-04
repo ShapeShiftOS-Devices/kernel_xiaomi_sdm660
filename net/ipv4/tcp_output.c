@@ -2296,7 +2296,7 @@ void tcp_chrono_stop(struct sock *sk, const enum tcp_chrono type)
  *
  * Send at most one packet when push_one > 0. Temporarily ignore
  * cwnd limit to force at most one packet out when push_one == 2.
-
+ 
  * Returns true, if no segments are in flight and we have queued segments,
  * but cannot send anything now because of SWS or another problem.
  */
