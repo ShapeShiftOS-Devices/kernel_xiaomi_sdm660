@@ -653,7 +653,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_nat_dma_cmd) +
 		   pre_entry * sizeof(struct ipa_ioc_nat_dma_one);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -697,7 +697,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_add_hdr) +
 		   pre_entry * sizeof(struct ipa_hdr_add);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -733,7 +733,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_del_hdr) +
 		   pre_entry * sizeof(struct ipa_hdr_del);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -769,7 +769,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_add_rt_rule) +
 		   pre_entry * sizeof(struct ipa_rt_rule_add);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -806,7 +806,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_mdfy_rt_rule) +
 		   pre_entry * sizeof(struct ipa_rt_rule_mdfy);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -842,7 +842,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_del_rt_rule) +
 		   pre_entry * sizeof(struct ipa_rt_rule_del);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -877,7 +877,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_add_flt_rule) +
 		   pre_entry * sizeof(struct ipa_flt_rule_add);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -914,7 +914,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_del_flt_rule) +
 		   pre_entry * sizeof(struct ipa_flt_rule_del);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -950,7 +950,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_mdfy_flt_rule) +
 		   pre_entry * sizeof(struct ipa_flt_rule_mdfy);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -1083,7 +1083,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			header)->num_tx_props;
 		pyld_sz = sz + pre_entry *
 			sizeof(struct ipa_ioc_tx_intf_prop);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -1125,7 +1125,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			header)->num_rx_props;
 		pyld_sz = sz + pre_entry *
 			sizeof(struct ipa_ioc_rx_intf_prop);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -1166,7 +1166,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			header)->num_ext_props;
 		pyld_sz = sz + pre_entry *
 			sizeof(struct ipa_ioc_ext_intf_prop);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -1200,7 +1200,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		   ((struct ipa_msg_meta *)header)->msg_len;
 		pyld_sz = sizeof(struct ipa_msg_meta) +
 		   pre_entry;
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -1336,7 +1336,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_add_hdr_proc_ctx) +
 		   pre_entry * sizeof(struct ipa_hdr_proc_ctx_add);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;
@@ -1371,7 +1371,7 @@ static long ipa_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		pyld_sz =
 		   sizeof(struct ipa_ioc_del_hdr_proc_ctx) +
 		   pre_entry * sizeof(struct ipa_hdr_proc_ctx_del);
-		param = kzalloc(pyld_sz, GFP_KERNEL);
+		param = memdup_user((const void __user *)arg, pyld_sz);
 		if (IS_ERR(param)) {
 			retval = -ENOMEM;
 			break;

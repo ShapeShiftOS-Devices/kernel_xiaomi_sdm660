@@ -2602,7 +2602,7 @@ begin:
 	};
 
 	sys->free_skb(skb);
-	return rc;
+	return 0;
 }
 
 static struct sk_buff *join_prev_skb(struct sk_buff *prev_skb,
